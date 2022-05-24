@@ -5,6 +5,9 @@ from django.utils.translation import gettext_lazy
 class Supplier(models.Model):
     name = models.CharField(max_length=64)
 
+    def __str__(self):
+        return self.name
+
 
 class Products(models.Model):
     class Unit(models.TextChoices):
@@ -16,6 +19,7 @@ class Products(models.Model):
     price = models.DecimalField(max_digits=7, decimal_places=2)
     unit = models.CharField(max_length=2, choices=Unit.choices, default=Unit.PIECES)
     supplier_name = models.ForeignKey(Supplier, on_delete=models.CASCADE)
+
 
 
 
