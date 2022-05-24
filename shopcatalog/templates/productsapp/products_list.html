@@ -14,7 +14,7 @@
       <tr>
         <th scope="row">{{ product.name|upper }}</th>
         <td>{{product.supplier_name.name}}</td>
-        <td>{{ product.unit }}</td>
+        <td>{{ product.get_unit_display }}</td>
         <td>{{ product.price }}</td>
       </tr>
     {% endfor %}
