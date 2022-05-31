@@ -9,7 +9,21 @@ class Supplier(models.Model):
         return self.name
 
 
+class ProductCategory(models.Model):
+    name = models.CharField(
+        verbose_name='имя',
+        max_length=64,
+        unique=True,
+    )
+
+    def __str__(self):
+        return self.name
+
+
 class Products(models.Model):
+    class Meta:
+        ordering = ['name']
+
     class Unit(models.TextChoices):
         PIECES = 'PC', gettext_lazy('Штук')
         KILOGRAM = 'KG', gettext_lazy('Килограм')
@@ -19,7 +33,7 @@ class Products(models.Model):
     price = models.DecimalField(max_digits=7, decimal_places=2)
     unit = models.CharField(max_length=2, choices=Unit.choices, default=Unit.PIECES)
     supplier_name = models.ForeignKey(Supplier, on_delete=models.CASCADE)
-
+    category = models.ManyToManyField(ProductCategory, verbose_name='Категория')
 
 
 

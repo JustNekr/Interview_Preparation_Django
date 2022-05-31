@@ -11,11 +11,19 @@ class ProductsListView(ListView):
     context_object_name = 'products'
     paginate_by = 5
 
+    def get_queryset(self):
+        queryset = super().get_queryset().prefetch_related('category').all()
+        if 'pk' in self.kwargs:
+            queryset = Products.objects.filter(category__id=self.kwargs['pk']).prefetch_related('category').all()
+        return queryset
+
 
 class ProductsCrateView(CreateView):
     model = Products
-    fields = ['name', 'price', 'unit', 'supplier_name']
+    fields = ['name', 'price', 'unit', 'supplier_name', 'category']
     template_name = 'productsapp/products_create.html'
 
     def get_success_url(self):
         return reverse_lazy('products:main')
+
+

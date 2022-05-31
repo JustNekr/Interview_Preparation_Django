@@ -4,6 +4,7 @@
   <thead>
     <tr>
       <th scope="col">Название</th>
+      <th scope="col">Категория</th>
       <th scope="col">Поставщик</th>
       <th scope="col">ед.изм.</th>
       <th scope="col">Цена</th>
@@ -13,6 +14,11 @@
     {% for product in products %}
       <tr>
         <th scope="row">{{ product.name|upper }}</th>
+        <th scope="row">
+          {% for cat in product.category.all %}
+          {{ cat }}
+          {% endfor %}
+        </th>
         <td>{{product.supplier_name.name}}</td>
         <td>{{ product.get_unit_display }}</td>
         <td>{{ product.price }}</td>
