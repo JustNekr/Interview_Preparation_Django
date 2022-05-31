@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'productsapp',
+    'hitcount',
 ]
 
 MIDDLEWARE = [
@@ -48,6 +49,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'hitcount.middleware.hit_count_middleware'
+
 ]
 
 ROOT_URLCONF = 'shopcatalog.urls'
@@ -63,7 +66,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'productsapp.context_processors.products_context.products_categories'
+                'productsapp.context_processors.products_context.products_categories',
             ],
         },
     },
