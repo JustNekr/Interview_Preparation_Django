@@ -12,9 +12,11 @@ class ProductsListView(ListView):
     paginate_by = 5
 
     def get_queryset(self):
-        queryset = super().get_queryset().prefetch_related('category').all()
+        # queryset = super().get_queryset().prefetch_related('category').all()
         if 'pk' in self.kwargs:
-            queryset = Products.objects.filter(category__id=self.kwargs['pk']).prefetch_related('category').all()
+            queryset = Products.on_site.filter(category__id=self.kwargs['pk']).prefetch_related('category').all()
+        else:
+            queryset = Products.on_site.prefetch_related('category').all()
         return queryset
 
 

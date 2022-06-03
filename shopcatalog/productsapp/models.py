@@ -1,4 +1,7 @@
+from django.contrib.sites.managers import CurrentSiteManager
+from django.contrib.sites.models import Site
 from django.db import models
+from django.db.models import Manager
 from django.utils.translation import gettext_lazy
 
 
@@ -10,11 +13,10 @@ class Supplier(models.Model):
 
 
 class ProductCategory(models.Model):
-    name = models.CharField(
-        verbose_name='имя',
-        max_length=64,
-        unique=True,
-    )
+    name = models.CharField(verbose_name='имя', max_length=64, unique=True)
+    site = models.ForeignKey(Site, on_delete=models.CASCADE, null=True)
+    objects = Manager()
+    on_site = CurrentSiteManager('site')
 
     def __str__(self):
         return self.name
@@ -34,6 +36,9 @@ class Products(models.Model):
     unit = models.CharField(max_length=2, choices=Unit.choices, default=Unit.PIECES)
     supplier_name = models.ForeignKey(Supplier, on_delete=models.CASCADE)
     category = models.ManyToManyField(ProductCategory, verbose_name='Категория')
+    site = models.ManyToManyField(Site)
+    objects = Manager()
+    on_site = CurrentSiteManager('site')
 
 
 
