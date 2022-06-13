@@ -39,6 +39,6 @@ class Products(models.Model):
     site = models.ManyToManyField(Site)
     objects = Manager()
     on_site = CurrentSiteManager('site')
-
+    # image = models.ImageField(verbose_name='Фото')
 
 
