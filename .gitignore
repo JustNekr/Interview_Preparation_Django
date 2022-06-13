@@ -1,3 +1,6 @@
 /venv/
 /.idea/
 /shopcatalog/db.sqlite3
+/shopcatalog/shopcatalog/settings/.env
+/pgdata/
+/nginx/static/
